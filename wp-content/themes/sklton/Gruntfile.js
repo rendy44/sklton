@@ -44,9 +44,32 @@ module.exports = function (grunt) {
                 tasks: ['uglify'],
                 options: {livereload: true},
             }
+        },
+        copy: {
+            js: {
+                expand: true,
+                cwd: './node_modules',
+                dest: './assets/vendor/js/',
+                flatten: true,
+                filter: 'isFile',
+                src: [
+                    './bootstrap/dist/js/bootstrap.min.js',
+                ]
+            },
+            css: {
+                expand: true,
+                cwd: './node_modules',
+                dest: './assets/vendor/css/',
+                flatten: true,
+                filter: 'isFile',
+                src: [
+                    './bootstrap/dist/css/bootstrap.min.css',
+                ]
+            }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.registerTask('default', ['watch']);

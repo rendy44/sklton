@@ -20,4 +20,5 @@
 !/wp-content/themes/sklton/
 /wp-content/themes/sklton/assets/css/*.css
 /wp-content/themes/sklton/assets/js/*.min.js
+/wp-content/themes/sklton/assets/vendor/*
 /wp-content/themes/sklton/node_modules/*
