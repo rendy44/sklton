@@ -18,6 +18,6 @@
 !/wp-content/themes
 /wp-content/themes/*
 !/wp-content/themes/sklton/
-/wp-content/themes/sklton/assets/css/*
+/wp-content/themes/sklton/assets/css/*.css
 /wp-content/themes/sklton/assets/js/*.min.js
 /wp-content/themes/sklton/node_modules/*
