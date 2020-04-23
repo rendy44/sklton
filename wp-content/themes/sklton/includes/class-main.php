@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.3
  */
 
 namespace Sklton;
@@ -50,6 +50,8 @@ if ( ! class_exists( 'Sklton\Main' ) ) {
 		 */
 		private function __construct() {
 			$this->load_class();
+
+			include TEMP_DIR . '/includes/functions.php';
 		}
 
 		/**
@@ -73,7 +75,7 @@ if ( ! class_exists( 'Sklton\Main' ) ) {
 		 *
 		 * @return array
 		 *
-		 * @version 0.0.2
+		 * @version 0.0.3
 		 * @since 0.0.1
 		 */
 		private function map_classes() {
@@ -81,6 +83,7 @@ if ( ! class_exists( 'Sklton\Main' ) ) {
 				'template',
 				'settings',
 				'assets',
+				'display',
 			);
 
 			/**
