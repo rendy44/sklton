@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 namespace Sklton;
@@ -170,13 +170,19 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 		/**
 		 * Map assets in front-end.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		private function map_front_assets() {
 
 			// Prepare front-end js.
 			$js_files = array(
-				'sklton' => array(
+				'bootstrap' => array(
+					'src'       => TEMP_URI . '/assets/vendor/js/bootstrap.min.js',
+					'deps'      => array( 'jquery' ),
+					'is_module' => false,
+				),
+				'sklton'    => array(
 					'src'  => TEMP_URI . '/assets/js/app.min.js',
 					'deps' => array( 'jquery' ),
 					'vars' => array(
@@ -200,10 +206,13 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 
 			// Prepare front-end css.
 			$css_files = array(
-				'font'   => array(
+				'font'      => array(
 					'src' => 'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
 				),
-				'sklton' => array(
+				'bootstrap' => array(
+					'src' => TEMP_URI . '/assets/vendor/css/bootstrap.min.css',
+				),
+				'sklton'    => array(
 					'src' => TEMP_URI . '/assets/css/app.css',
 				),
 			);
@@ -225,7 +234,7 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 		 * Load front-end's assets.
 		 *
 		 * @param string $type type of the asset, css|js.
-		 * @param bool $is_front whether load assets in front-end or not.
+		 * @param bool   $is_front whether load assets in front-end or not.
 		 *
 		 * @since 0.0.1
 		 */
@@ -261,9 +270,9 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 		 * Add asset for front-end.
 		 *
 		 * @param string $name name of the asset.
-		 * @param array $args array of the new asset.
+		 * @param array  $args array of the new asset.
 		 * @param string $type type of the asset, css|js.
-		 * @param bool $is_front whether map front-end's assets or not.
+		 * @param bool   $is_front whether map front-end's assets or not.
 		 *
 		 * @version 0.0.2
 		 * @since 0.0.1
@@ -301,9 +310,9 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 		/**
 		 * Do load the assets.
 		 *
-		 * @param array $assets list of the assets.
+		 * @param array  $assets list of the assets.
 		 * @param string $type type of the asset, css|js.
-		 * @param bool $is_front whether map front-end's assets or not.
+		 * @param bool   $is_front whether map front-end's assets or not.
 		 *
 		 * @since 0.0.1
 		 */
