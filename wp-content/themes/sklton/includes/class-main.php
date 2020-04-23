@@ -45,6 +45,8 @@ if ( ! class_exists( 'Sklton\Main' ) ) {
 
 		/**
 		 * Main constructor.
+		 *
+		 * @since 0.0.1
 		 */
 		private function __construct() {
 			$this->load_class();
@@ -71,10 +73,15 @@ if ( ! class_exists( 'Sklton\Main' ) ) {
 		 *
 		 * @return array
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		private function map_classes() {
-			$classes = array();
+			$classes = array(
+				'template',
+				'settings',
+				'assets',
+			);
 
 			/**
 			 * Sklton dependency classes filter hook.
