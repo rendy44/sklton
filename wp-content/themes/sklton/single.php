@@ -4,12 +4,19 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+/**
+ * Load theme header.
+ *
+ * @since 0.0.2
+ */
+get_header();
 
 /**
  * Sklton before post content action hook.
