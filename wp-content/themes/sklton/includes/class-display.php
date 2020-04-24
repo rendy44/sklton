@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.6
+ * @version 0.0.7
  */
 
 namespace Sklton;
@@ -46,10 +46,12 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Display constructor.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		private function __construct() {
 			$this->global_display();
+			$this->post_display();
 		}
 
 		/**
@@ -70,6 +72,19 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			add_action( 'sklton_footer_content', array( $this, 'footer_open' ), 10 );
 			add_action( 'sklton_footer_content', array( $this, 'footer_content' ), 20 );
 			add_action( 'sklton_footer_content', array( $this, 'footer_close' ), 30 );
+		}
+
+		/**
+		 * Manage display for single post.
+		 *
+		 * @since 0.0.6
+		 */
+		private function post_display() {
+
+			// Global post display.
+			add_action( 'sklton_before_post_content', array( $this, 'global_post_content_open' ), 10, 2 );
+			add_action( 'sklton_post_content', array( $this, 'global_post_content' ), 10, 1 );
+			add_action( 'sklton_after_post_content', array( $this, 'global_post_content_close' ), 50, 2 );
 		}
 
 		/**
@@ -201,6 +216,53 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		 */
 		public function footer_close() {
 			sk_template( 'global/footer-close' );
+		}
+
+		/**
+		 * Callback for displaying post content opening tag.
+		 *
+		 * @param int    $current_post_id id of the post.
+		 * @param string $current_post_type name of the post type.
+		 *
+		 * @since 0.0.7
+		 */
+		public function global_post_content_open( $current_post_id, $current_post_type ) {
+			$args = array(
+				'section_class' => "single-post single-{$current_post_type}-post-type",
+			);
+
+			/**
+			 * Sklton post content opening tag args filte hook.
+			 *
+			 * @param array $args default args.
+			 * @param int $current_post_id id of the post.
+			 * @param string $current_post_type name of the post type.
+			 *
+			 * @since 0.0.7
+			 */
+			$args = apply_filters( 'sklton_post_content_open_args', $args, $current_post_id, $current_post_type );
+
+			sk_template( 'global/section-open', $args );
+		}
+
+		/**
+		 * Callback for displaying global single post's content.
+		 *
+		 * @since 0.0.7
+		 */
+		public function global_post_content() {
+			echo '<article>'; // phpcs:ignore
+			the_content();
+			echo '</article>'; // phpcs:ignore
+		}
+
+		/**
+		 * Callback for displaying post content closing tag.
+		 *
+		 * @since 0.0.7
+		 */
+		public function global_post_content_close() {
+			sk_template( 'global/section-close' );
 		}
 	}
 

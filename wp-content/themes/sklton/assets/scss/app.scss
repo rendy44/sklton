@@ -6,6 +6,11 @@
 // Include base style.
 @import "variables";
 
+// Include base styles.
+@import "base";
+
 // Include components.
+@import "components/sections";
 @import "components/masthead";
+@import "components/single";
 @import "components/footer";
