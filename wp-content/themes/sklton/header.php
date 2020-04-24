@@ -4,7 +4,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -33,9 +33,10 @@ wp_body_open();
  * Sklton after header content action hook.
  *
  * @hooked Sklton\Display->masthead_open() - 10
+ * @hooked Sklton\Display->masthead_content() - 20
  * @hooked Sklton\Display->masthead_close() - 30
  *
- * @version 0.0.2
+ * @version 0.0.3
  * @since 0.0.1
  */
 do_action( 'sklton_after_header_content' );
