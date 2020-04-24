@@ -1,5 +1,10 @@
+// Include bootstrap style.
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+@import "./node_modules/bootstrap/scss/mixins";
+
+// Include base style.
 @import "variables";
 
-html, body {
-  font-family: 'Roboto', sans-serif;
-}
+// Include components.
+@import "components/masthead";

@@ -1,0 +1,23 @@
+section.masthead {
+  background-color: darken($white, 5%);
+  height: 400px;
+
+  > .container {
+    height: 100%;
+
+    > .row {
+      height: 100%;
+
+      > .column-content {
+      }
+    }
+  }
+
+  // Style for front-page masthead.
+  &.masthead-front {
+    @include media-breakpoint-up(md) {
+      height: 100vh !important;
+      min-height: 500px;
+    }
+  }
+}
