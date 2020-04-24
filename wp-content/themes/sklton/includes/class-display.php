@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.5
+ * @version 0.0.6
  */
 
 namespace Sklton;
@@ -75,13 +75,12 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Callback for displaying masthead opening tag.
 		 *
-		 * @version 0.0.3
+		 * @version 0.0.4
 		 * @since 0.0.1
 		 */
 		public function masthead_open() {
 			$args = array(
 				'section_class' => is_front_page() ? 'masthead masthead-front' : 'masthead',
-				'section_size'  => 'col-md-10 col-lg-8 column-content d-flex h-100 justify-content-center align-items-center',
 			);
 
 			/**
