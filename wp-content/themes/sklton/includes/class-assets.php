@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 namespace Sklton;
@@ -118,12 +118,17 @@ if ( ! class_exists( 'Sklton\Assets' ) ) {
 		 *
 		 * @return  string
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.3
 		 */
 		public function load_as_module( $tag, $handle, $src ) {
 			$js_prefix = TEMP_PREFIX . 'module_';
-			if ( in_array( $handle, $this->as_module, true ) || false !== strpos( $handle, $js_prefix ) ) {
-				$tag = '<script type="module" src="' . esc_url( $src ) . '"></script>'; // phpcs:ignore
+
+			// Validate the module list before fetching it.
+			if ( ! empty( $this->as_module ) ) {
+				if ( in_array( $handle, $this->as_module, true ) || false !== strpos( $handle, $js_prefix ) ) {
+					$tag = '<script type="module" src="' . esc_url( $src ) . '"></script>'; // phpcs:ignore
+				}
 			}
 
 			return $tag;
