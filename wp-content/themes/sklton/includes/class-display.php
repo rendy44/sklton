@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.4
+ * @version 0.0.5
  */
 
 namespace Sklton;
@@ -75,12 +75,13 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Callback for displaying masthead opening tag.
 		 *
-		 * @version 0.0.2
+		 * @version 0.0.3
 		 * @since 0.0.1
 		 */
 		public function masthead_open() {
 			$args = array(
-				'masthead_class' => is_front_page() ? 'masthead-front' : '',
+				'section_class' => is_front_page() ? 'masthead masthead-front' : 'masthead',
+				'section_size'  => 'col-md-10 col-lg-8 column-content d-flex h-100 justify-content-center align-items-center',
 			);
 
 			/**
@@ -92,7 +93,7 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			 */
 			$args = apply_filters( 'sklton_masthead_open_args', $args );
 
-			sk_template( 'global/masthead-open', $args );
+			sk_template( 'global/section-open', $args );
 		}
 
 		/**
@@ -133,10 +134,11 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Callback for displaying masthead closing tag.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		public function masthead_close() {
-			sk_template( 'global/masthead-close' );
+			sk_template( 'global/section-close' );
 		}
 
 		/**
