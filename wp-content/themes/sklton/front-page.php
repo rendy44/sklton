@@ -4,7 +4,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -32,31 +32,13 @@ while ( have_posts() ) {
 	$page_id = get_the_ID();
 
 	/**
-	 * Sklton before front page loop content action hook.
-	 *
-	 * @param int $page_id id of the front page.
-	 *
-	 * @since 0.0.1
-	 */
-	do_action( 'sklton_before_front_page_loop_content', $page_id );
-
-	/**
 	 * Sklton front page loop content action hook.
 	 *
 	 * @param int $page_id id of the front page.
 	 *
 	 * @since 0.0.1
 	 */
-	do_action( 'sklton_front_page_loop_content', $page_id );
-
-	/**
-	 * Sklton after front page loop content action hook.
-	 *
-	 * @param int $page_id id of the front page.
-	 *
-	 * @since 0.0.1
-	 */
-	do_action( 'sklton_after_front_page_loop_content', $page_id );
+	do_action( 'sklton_front_page_content', $page_id );
 }
 
 /**
