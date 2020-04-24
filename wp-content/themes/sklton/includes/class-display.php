@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 namespace Sklton;
@@ -55,6 +55,7 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Manage display for global content.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		private function global_display() {
@@ -64,6 +65,11 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			add_action( 'sklton_after_header_content', array( $this, 'masthead_content' ), 20 );
 			add_action( 'sklton_after_header_content', array( $this, 'masthead_close' ), 30 );
 			add_filter( 'sklton_masthead_content_title', array( $this, 'masthead_title' ), 10, 1 );
+
+			// Footer display.
+			add_action( 'sklton_footer_content', array( $this, 'footer_open' ), 10 );
+			add_action( 'sklton_footer_content', array( $this, 'footer_content' ), 20 );
+			add_action( 'sklton_footer_content', array( $this, 'footer_close' ), 30 );
 		}
 
 		/**
@@ -103,6 +109,8 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			 * @param string $masthead_title default masthead title.
 			 *
 			 * @hooked $this->masthead_title() - 10
+			 *
+			 * @since 0.0.1
 			 */
 			$masthead_title = apply_filters( 'sklton_masthead_content_title', $masthead_title );
 
@@ -152,6 +160,46 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			}
 
 			return $title;
+		}
+
+		/**
+		 * Callback for displaying footer opening tag.
+		 *
+		 * @since 0.0.4
+		 */
+		public function footer_open() {
+			$args = array(
+				'footer_class' => 'footer-dark',
+			);
+
+			/**
+			 * Sklton footer opening tag args filter hook.
+			 *
+			 * @param array $args default args.
+			 *
+			 * @since 0.0.1
+			 */
+			$args = apply_filters( 'sklton_footer_open_args', $args );
+
+			sk_template( 'global/footer-open', $args );
+		}
+
+		/**
+		 * Callback for displaying footer content.
+		 *
+		 * @since 0.0.4
+		 */
+		public function footer_content() {
+			sk_template( 'global/footer-content' );
+		}
+
+		/**
+		 * Callback for displaying footer closing tag.
+		 *
+		 * @since 0.0.4
+		 */
+		public function footer_close() {
+			sk_template( 'global/footer-close' );
 		}
 	}
 
