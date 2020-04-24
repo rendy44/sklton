@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 namespace Sklton;
@@ -63,6 +63,7 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			add_action( 'sklton_after_header_content', array( $this, 'masthead_open' ), 10 );
 			add_action( 'sklton_after_header_content', array( $this, 'masthead_content' ), 20 );
 			add_action( 'sklton_after_header_content', array( $this, 'masthead_close' ), 30 );
+			add_filter( 'sklton_masthead_content_title', array( $this, 'masthead_title' ), 10, 1 );
 		}
 
 		/**
@@ -100,6 +101,8 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			 * Sklton masthead content title filter hook.
 			 *
 			 * @param string $masthead_title default masthead title.
+			 *
+			 * @hooked $this->masthead_title() - 10
 			 */
 			$masthead_title = apply_filters( 'sklton_masthead_content_title', $masthead_title );
 
@@ -126,6 +129,29 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		 */
 		public function masthead_close() {
 			sk_template( 'global/masthead-close' );
+		}
+
+		/**
+		 * Callback for modifying masthead title.
+		 *
+		 * @param string $title default masthead title.
+		 *
+		 * @return string
+		 *
+		 * @since 0.0.3
+		 */
+		public function masthead_title( $title ) {
+
+			// Modify title depends on the current page.
+			if ( is_front_page() ) {
+				$title = __( 'Welcome to Sklton!', 'sklton' );
+			} elseif ( is_archive() ) {
+				$title = get_the_archive_title();
+			} elseif ( is_404() ) {
+				$title = __( 'Not Found', 'sklton' );
+			}
+
+			return $title;
 		}
 	}
 
