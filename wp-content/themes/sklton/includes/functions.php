@@ -4,7 +4,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 use Sklton\Template;
@@ -17,22 +17,24 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Validate default variable.
  *
  * @param string $var variable.
- * @param mixed $default_val variable default value.
+ * @param mixed  $default_val variable default value.
+ * @param array  $merge whether merge default value or replace it.
  *
  * @return mixed
  *
+ * @version 0.0.2
  * @since 0.0.1
  */
-function sk_validate_var( $var, $default_val ) {
-	return isset( $var ) && $var ? $var : $default_val;
+function sk_validate_var( $var, $default_val, $merge = true ) {
+	return isset( $var ) && $var ? ( $merge ? $default_val . ' ' . $var : $var ) : $default_val;
 }
 
 /**
  * Render template.
  *
  * @param string $template_name template name.
- * @param array $args list of variable.
- * @param bool $echo whether echo the template or not.
+ * @param array  $args list of variable.
+ * @param bool   $echo whether echo the template or not.
  *
  * @return string|void
  */
