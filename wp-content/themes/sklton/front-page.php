@@ -32,7 +32,7 @@ while ( have_posts() ) {
 	$page_id = get_the_ID();
 
 	/**
-	 * Sklton front page loop content action hook.
+	 * Sklton front page content action hook.
 	 *
 	 * @param int $page_id id of the front page.
 	 *
