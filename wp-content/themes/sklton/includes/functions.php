@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @param string $var variable.
  * @param mixed  $default_val variable default value.
- * @param array  $merge whether merge default value or replace it.
+ * @param bool   $merge whether merge default value or replace it.
  *
  * @return mixed
  *
