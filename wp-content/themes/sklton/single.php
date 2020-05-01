@@ -41,7 +41,7 @@ while ( have_posts() ) {
 	 * @param int $current_post_id id of the post.
 	 * @param string $current_post_type name of the post type.
 	 *
-	 * @hooked Sklton\Sklton->global_post_content_open() - 10
+	 * @hooked Sklton\Display->global_post_content_open() - 10
 	 *
 	 * @since 0.0.1
 	 */
@@ -72,7 +72,7 @@ while ( have_posts() ) {
 	 * @param int $current_post_id id of the post.
 	 * @param string $current_post_type name of the post type.
 	 *
-	 * @hooked Sklton\Sklton->global_post_content_close() - 50
+	 * @hooked Sklton\Display->global_post_content_close() - 50
 	 *
 	 * @since 0.0.1
 	 */
