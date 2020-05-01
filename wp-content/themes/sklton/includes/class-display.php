@@ -241,6 +241,8 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			 * @param int $current_post_id id of the post.
 			 * @param string $current_post_type name of the post type.
 			 *
+			 * @hooked this->modify_post_content_open_args() - 10
+			 *
 			 * @since 0.0.7
 			 */
 			$args = apply_filters( 'sklton_post_content_open_args', $args, $current_post_id, $current_post_type );
