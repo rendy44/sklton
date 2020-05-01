@@ -4,7 +4,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,7 +16,7 @@ $navbar_class = sk_validate_var( $navbar_class, 'sticky-top navbar-expand-lg nav
 
 <nav class="navbar <?php echo esc_attr( $navbar_class ); ?>">
 	<div class="container">
-		<a class="navbar-brand" href="<?php home_url(); ?>>">
+		<a class="navbar-brand" href="<?php bloginfo( 'url' ); ?>">
 			<?php bloginfo( 'name' ); ?>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
