@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 namespace Sklton;
@@ -80,6 +80,7 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 		/**
 		 * Callback for registering widgets.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.2
 		 */
 		public function register_widgets() {
@@ -87,7 +88,7 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 				array(
 					'name'          => __( 'Sidebar', 'sklton' ),
 					'id'            => 'sk_sidebar',
-					'before_widget' => '<div class="card widget-item mb-4">',
+					'before_widget' => '<div class="card widget-item">',
 					'before_title'  => '<h5 class="card-header">',
 					'after_title'   => '</h5>',
 					'after_widget'  => '</div>',

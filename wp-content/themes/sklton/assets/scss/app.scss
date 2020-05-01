@@ -3,8 +3,9 @@
 @import "./node_modules/bootstrap/scss/variables";
 @import "./node_modules/bootstrap/scss/mixins";
 
-// Include base style.
+// Include util files.
 @import "variables";
+@import "mixins";
 
 // Include base styles.
 @import "base";
@@ -13,4 +14,5 @@
 @import "components/sections";
 @import "components/masthead";
 @import "components/single";
+@import "components/widget";
 @import "components/footer";

@@ -1,0 +1,40 @@
+.card.widget-item {
+  border: none;
+  padding: 0 1rem;
+  margin-bottom: 2.5rem;
+
+  h5.card-header {
+    font-weight: 400;
+    padding: 0;
+    background-color: transparent;
+    border-bottom: none;
+    margin-bottom: .75rem;
+    color: $base_color;
+    font-size: 22px;
+    @include media-breakpoint-up(md) {
+      font-size: 26px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    li {
+      padding: .5rem;
+      border-bottom: 1px solid $gray-100;
+
+      a {
+        color: unset;
+        @include def_transition;
+      }
+
+      &:hover {
+        a {
+          color: $base_color;
+        }
+      }
+    }
+  }
+}

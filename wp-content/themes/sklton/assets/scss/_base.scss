@@ -1,4 +1,16 @@
 html,
 body {
-  color: lighten($black, 30%);
+  color: $text_color;
+
+  a {
+    color: $base_color;
+    @include def_transition;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: lighten($base_color, 20%);
+      text-decoration: none;
+    }
+  }
 }
