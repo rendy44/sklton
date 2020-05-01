@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 namespace Sklton;
@@ -57,6 +57,7 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 		/**
 		 * Modify theme supports.
 		 *
+		 * @version 0.0.2
 		 * @since 0.0.1
 		 */
 		private function theme_supports() {
@@ -66,11 +67,32 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 			add_theme_support( 'menus' );
 			add_theme_support( 'post-thumbnails' );
 
+			// Register widget.
+			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
 			// Remove tag generator.
 			remove_action( 'wp_head', 'wp_generator' );
 
 			// Manage guttenberg availability.
 			add_filter( 'use_block_editor_for_post', array( $this, 'modify_guttenberg_availability' ), 10, 2 );
+		}
+
+		/**
+		 * Callback for registering widgets.
+		 *
+		 * @since 0.0.2
+		 */
+		public function register_widgets() {
+			register_sidebar(
+				array(
+					'name'          => __( 'Sidebar', 'sklton' ),
+					'id'            => 'sk_sidebar',
+					'before_widget' => '<div class="card widget-item mb-4">',
+					'before_title'  => '<h5 class="card-header">',
+					'after_title'   => '</h5>',
+					'after_widget'  => '</div>',
+				)
+			);
 		}
 
 		/**

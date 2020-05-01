@@ -4,7 +4,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 use Sklton\Template;
@@ -40,4 +40,17 @@ function sk_validate_var( $var, $default_val, $merge = true ) {
  */
 function sk_template( $template_name, $args = array(), $echo = true ) {
 	return Template::render( $template_name, $args, $echo );
+}
+
+/**
+ * Check whether sidebar is active or not.
+ *
+ * @param string $sidebar_index name of the sidebar.
+ *
+ * @return bool
+ *
+ * @since 0.0.3
+ */
+function sk_is_using_sidebar( $sidebar_index = 'sk_sidebar' ) {
+	return is_active_sidebar( $sidebar_index );
 }

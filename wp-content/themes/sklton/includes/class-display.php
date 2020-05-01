@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.7
+ * @version 0.0.8
  */
 
 namespace Sklton;
@@ -83,7 +83,10 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 
 			// Global post display.
 			add_action( 'sklton_before_post_content', array( $this, 'global_post_content_open' ), 10, 2 );
+			add_action( 'sklton_before_post_content', array( $this, 'maybe_post_two_columns_open' ), 20, 2 );
+			add_filter( 'sklton_post_content_open_args', array( $this, 'modify_post_content_open_args' ), 10, 3 );
 			add_action( 'sklton_post_content', array( $this, 'global_post_content' ), 10, 1 );
+			add_action( 'sklton_after_post_content', array( $this, 'maybe_post_two_columns_close' ), 40, 2 );
 			add_action( 'sklton_after_post_content', array( $this, 'global_post_content_close' ), 50, 2 );
 		}
 
@@ -232,7 +235,7 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			);
 
 			/**
-			 * Sklton post content opening tag args filte hook.
+			 * Sklton post content opening tag args filter hook.
 			 *
 			 * @param array $args default args.
 			 * @param int $current_post_id id of the post.
@@ -246,6 +249,55 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		}
 
 		/**
+		 * Callback maybe for displaying post two columns opening tag.
+		 *
+		 * @param int    $current_post_id id of the post.
+		 * @param string $current_post_type name of the post type.
+		 *
+		 * @since 0.0.8
+		 */
+		public function maybe_post_two_columns_open( $current_post_id, $current_post_type ) {
+
+			// Make sure we are on post type post.
+			if ( 'post' === $current_post_type ) {
+
+				// Make sure the sidebar is active.
+				if ( is_active_sidebar( 'sk_sidebar' ) ) {
+					?>
+					<div class="row">                        <div class="col-lg-9">
+					<?php
+				}
+			}
+		}
+
+		/**
+		 * Callback for modifying post content open args.
+		 *
+		 * @param array  $args default args.
+		 * @param int    $current_post_id id of the post.
+		 * @param string $current_post_type name of the post type.
+		 *
+		 * @return array
+		 *
+		 * @since 0.0.7
+		 */
+		public function modify_post_content_open_args( $args, $current_post_id, $current_post_type ) {
+
+			// Make sure we are on post type post.
+			if ( 'post' === $current_post_type ) {
+
+				// Also make sure that the sidebar is active.
+				if ( sk_is_using_sidebar() ) {
+
+					// Merge the args.
+					$args['section_size'] = 'col-md-12';
+				}
+			}
+
+			return $args;
+		}
+
+		/**
 		 * Callback for displaying global single post's content.
 		 *
 		 * @since 0.0.7
@@ -254,6 +306,31 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			echo '<article>'; // phpcs:ignore
 			the_content();
 			echo '</article>'; // phpcs:ignore
+		}
+
+		/**
+		 * Callback maybe for displaying post two columns opening tag.
+		 *
+		 * @param int    $current_post_id id of the post.
+		 * @param string $current_post_type name of the post type.
+		 *
+		 * @since 0.0.8
+		 */
+		public function maybe_post_two_columns_close( $current_post_id, $current_post_type ) {
+
+			// Make sure we are on post type post.
+			if ( 'post' === $current_post_type ) {
+
+				// Make sure the sidebar is active.
+				if ( is_active_sidebar( 'sk_sidebar' ) ) {
+					?>
+					</div> <!-- /.col-lg-9 -->
+					<div class="col-lg-3">
+						<?php dynamic_sidebar( 'sk_sidebar' ); ?>
+					</div>                    </div> <!-- /.row -->
+					<?php
+				}
+			}
 		}
 
 		/**
