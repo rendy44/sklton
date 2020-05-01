@@ -5,7 +5,7 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.8
+ * @version 0.0.9
  */
 
 namespace Sklton;
@@ -57,15 +57,18 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 		/**
 		 * Manage display for global content.
 		 *
-		 * @version 0.0.2
+		 * @version 0.0.3
 		 * @since 0.0.1
 		 */
 		private function global_display() {
 
+			// Navbar.
+			add_action( 'sklton_after_header_content', array( $this, 'navbar' ), 10 );
+
 			// Masthead display.
-			add_action( 'sklton_after_header_content', array( $this, 'masthead_open' ), 10 );
-			add_action( 'sklton_after_header_content', array( $this, 'masthead_content' ), 20 );
-			add_action( 'sklton_after_header_content', array( $this, 'masthead_close' ), 30 );
+			add_action( 'sklton_after_header_content', array( $this, 'masthead_open' ), 20 );
+			add_action( 'sklton_after_header_content', array( $this, 'masthead_content' ), 30 );
+			add_action( 'sklton_after_header_content', array( $this, 'masthead_close' ), 40 );
 			add_filter( 'sklton_masthead_content_title', array( $this, 'masthead_title' ), 10, 1 );
 
 			// Footer display.
@@ -88,6 +91,28 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 			add_action( 'sklton_post_content', array( $this, 'global_post_content' ), 10, 1 );
 			add_action( 'sklton_after_post_content', array( $this, 'maybe_post_two_columns_close' ), 40, 2 );
 			add_action( 'sklton_after_post_content', array( $this, 'global_post_content_close' ), 50, 2 );
+		}
+
+		/**
+		 * Callback for displaying navbar.
+		 *
+		 * @since 0.0.9
+		 */
+		public function navbar() {
+			$args = array(
+				'nav_location' => 'top_nav',
+			);
+
+			/**
+			 * Sklton navbar args filter hook.
+			 *
+			 * @param array $args default args.
+			 *
+			 * @since 0.0.9
+			 */
+			$args = apply_filters( 'sklton_navbar_args', $args );
+
+			sk_template( 'global/navbar', $args );
 		}
 
 		/**
@@ -266,7 +291,8 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 				// Make sure the sidebar is active.
 				if ( is_active_sidebar( 'sk_sidebar' ) ) {
 					?>
-					<div class="row">                        <div class="col-lg-9">
+					<div class="row">
+					<div class="col-lg-9">
 					<?php
 				}
 			}
@@ -329,7 +355,8 @@ if ( ! class_exists( 'Sklton\Display' ) ) {
 					</div> <!-- /.col-lg-9 -->
 					<div class="col-lg-3">
 						<?php dynamic_sidebar( 'sk_sidebar' ); ?>
-					</div>                    </div> <!-- /.row -->
+					</div>
+					</div> <!-- /.row -->
 					<?php
 				}
 			}

@@ -5,11 +5,12 @@
  *
  * @author WPerfekt
  * @package Sklton
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 namespace Sklton;
 
+use stdClass;
 use WP_Post;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -57,7 +58,7 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 		/**
 		 * Modify theme supports.
 		 *
-		 * @version 0.0.2
+		 * @version 0.0.3
 		 * @since 0.0.1
 		 */
 		private function theme_supports() {
@@ -69,6 +70,15 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 
 			// Register widget.
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+			// Register nav menu.
+			add_action( 'after_setup_theme', array( $this, 'register_menus' ) );
+
+			// Manage nav menu class.
+			add_filter( 'nav_menu_css_class', array( $this, 'nav_menu_class' ), 10, 4 );
+
+			// Manage nav menu link class.
+			add_filter( 'nav_menu_link_attributes', array( $this, 'nav_menu_link_attributes' ), 10, 4 );
 
 			// Remove tag generator.
 			remove_action( 'wp_head', 'wp_generator' );
@@ -94,6 +104,66 @@ if ( ! class_exists( 'Sklton\Settings' ) ) {
 					'after_widget'  => '</div>',
 				)
 			);
+		}
+
+		/**
+		 * Callback for registering nav menus.
+		 *
+		 * @since 0.0.8
+		 */
+		public function register_menus() {
+			$args = array( 'top_nav' => __( 'Top Nav', 'sklton' ) );
+
+			/**
+			 * Sklton nav menus filter hook.
+			 *
+			 * @param array $args default nav menu.
+			 *
+			 * @since 0.0.8
+			 */
+			$args = apply_filters( 'sklton_nav_menus', $args );
+
+			register_nav_menus( $args );
+		}
+
+		/**
+		 * Callback for modifying menu class.
+		 *
+		 * @param string[] $classes Array of the CSS classes that are applied to the menu item's `<li>` element.
+		 * @param WP_Post  $item The current menu item.
+		 * @param stdClass $args An object of wp_nav_menu() arguments.
+		 * @param int      $depth Depth of menu item. Used for padding.
+		 *
+		 * @return string[]
+		 *
+		 * @since 0.0.4
+		 */
+		public function nav_menu_class( $classes, $item, $args, $depth ) {
+
+			// Merge the class.
+			$classes[] = 'nav-item';
+
+			return $classes;
+		}
+
+		/**
+		 * Callback for modifying menu link attributes.
+		 *
+		 * @param array    $atts attributes html.
+		 * @param WP_Post  $item The current menu item.
+		 * @param stdClass $args An object of wp_nav_menu() arguments.
+		 * @param int      $depth Depth of menu item. Used for padding.
+		 *
+		 * @return array
+		 *
+		 * @since 0.0.4
+		 */
+		public function nav_menu_link_attributes( $atts, $item, $args, $depth ) {
+
+			// Merge the attribute.
+			$atts['class'] = 'nav-link';
+
+			return $atts;
 		}
 
 		/**
